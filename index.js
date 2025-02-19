@@ -31,12 +31,7 @@ $("#form").submit(function(e){
                 let saveBtn = document.getElementById("save")
                 saveBtn.style.display = "block"
             })            
-            .catch(error => console.error("Помилка:", error));
- 
-   
-    
-
-    
+            .catch(error => console.error("Помилка:", error));    
  })
 
  function saveAsCSV() {
