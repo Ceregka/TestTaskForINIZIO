@@ -6,32 +6,31 @@ $("#form").submit(function(e){
     var query = $("#search").val()
 
     let result = ''
-
-    var API_KEY = 'eaa855e42757a7e1cc239caf19495d89'
-
-    var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + '&type=web&query=' + query
-
     
-    $.get(url, function (data) {
+    let apiKey = "AIzaSyAexqF1IHx92CL0oR6ynYYIXdMpuRYhKXo";
+    let cx = "e1ce37b10d7ae4c77"; 
+    let url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=${apiKey}&cx=${cx}`;
 
-        $("#result").html ('')
-        console.log(data)
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
 
-        searchResults = data.organic_results
+                // console.log(data)
+                searchResults = data.items
 
-        data.organic_results.forEach(res => {
+                let output = ""
 
-            result = `
-                <h1>${res.title}</h1><br><a target="_blank" href="${res.url}">${res.url}</a>
-                <p>${res.snippet}</p>
+                data.items.forEach(item => {
+                    output += `<li><a href="${item.link}" target="_blank">${item.title}</a><br>${item.snippet}</li>`;
+                });
 
-            `
+                output += "</ul>";
 
-            $("#result").append(result)           
-            
-        });
-    })
-    
+                document.getElementById("results").innerHTML = output;
+            })
+            .catch(error => console.error("Помилка:", error));
+ 
+   
     let saveBtn = document.getElementById("save")
 
     saveBtn.style.display = "block"
