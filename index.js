@@ -18,7 +18,7 @@ $("#form").submit(function(e){
                 // console.log(data)
                 searchResults = data.items
 
-                let output = ""
+                let output = "<ul>";
 
                 data.items.forEach(item => {
                     output += `<li><a href="${item.link}" target="_blank">${item.title}</a><br>${item.snippet}</li>`;
@@ -27,18 +27,21 @@ $("#form").submit(function(e){
                 output += "</ul>";
 
                 document.getElementById("results").innerHTML = output;
-            })
+
+                let saveBtn = document.getElementById("save")
+                saveBtn.style.display = "block"
+            })            
             .catch(error => console.error("Помилка:", error));
  
    
-    let saveBtn = document.getElementById("save")
+    
 
-    saveBtn.style.display = "block"
+    
  })
 
  function saveAsCSV() {
     if (searchResults.length === 0) {
-        alert("The is nothimg to save");
+        alert("The is nothing to save");
         return;
     }
 
