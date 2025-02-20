@@ -14,8 +14,7 @@ $("#form").submit(function(e){
         fetch(url)
             .then(response => response.json())
             .then(data => {
-
-                // console.log(data)
+                
                 searchResults = data.items
 
                 let output = "<ul>";
@@ -31,7 +30,7 @@ $("#form").submit(function(e){
                 let saveBtn = document.getElementById("save")
                 saveBtn.style.display = "block"
             })            
-            .catch(error => console.error("Помилка:", error));    
+            .catch(error => console.error("Error:", error));    
  })
 
  function saveAsCSV() {
